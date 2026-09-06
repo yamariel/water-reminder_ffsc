@@ -1,13 +1,36 @@
 import 'package:flutter/cupertino.dart';
 
 class WaterProgressWidget extends StatelessWidget{
+  final int valuerConsommee;
+  final int objectifJournalier;
 
 
+  const WaterProgressWidget({
+    required this.valuerConsommee,
+    required this.objectifJournalier
+  });
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    //Calculer le procentage de progression
+    final double progression=(valuerConsommee/objectifJournalier).clamp(0.0, 1.0);
+    return SizedBox(
+      height: 350,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          /// ÉCHELLE
+
+
+          /// VERRE
+
+
+          const SizedBox(width: 20),
+        ],
+      ),
+    );
   }
 
 

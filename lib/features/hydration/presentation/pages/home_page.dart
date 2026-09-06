@@ -7,7 +7,26 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('WaterReminder')),
-      body: const Center(child: Text('Page accueil/hydratation')),
+     body: Center(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+  const Text('2550ml'),
+  const Text('1300ml'),
+  const SizedBox(height: 20),
+  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      ElevatedButton(onPressed: () {}, child: const Text('150ml')),
+      const SizedBox(width: 10),
+      ElevatedButton(onPressed: () {}, child: const Text('250ml')),
+      const SizedBox(width: 10),
+      ElevatedButton(onPressed: () {}, child: const Text('500ml')),
+    ],
+  ),
+],
+  ),
+),
     );
   }
 }

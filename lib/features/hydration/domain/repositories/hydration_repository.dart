@@ -12,4 +12,7 @@ abstract class HydrationRepository {
 
   // Récupérer tout l'historique des consommations
   Future<List<HydrationRecord>> getHistory();
+
+  // Supprimer une entrée précise de l'historique via son index
+  Future<void> deleteRecord(int index);
 }

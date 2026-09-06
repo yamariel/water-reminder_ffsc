@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
+import '../../features/hydration/presentation/pages/history_page.dart';
 import '../../features/hydration/presentation/pages/home_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 
@@ -14,7 +15,11 @@ class MainScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(bottomNavIndexProvider);
 
-    final List<Widget> pages = [const HomePage(), const SettingsPage()];
+    final List<Widget> pages = [
+      const HomePage(),
+      const HistoryPagePage(),
+      const SettingsPage(),
+    ];
 
     return Scaffold(
       body: IndexedStack(index: currentIndex, children: pages),
@@ -29,6 +34,10 @@ class MainScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.water_drop),
             label: 'Hydratation',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'Historique',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

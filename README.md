@@ -47,7 +47,7 @@ lib/
  │                   └── settings_page.dart        <-- Godo [Débutant] (Formulaire : Genre, Poids, Réveil/Coucher)
  │
  └── main.dart                             <--  Lead  [Intermédiaire] (Navigation & Root)
-
+```
 ### Récapitulatif Strict par Développeur
 
 ```text

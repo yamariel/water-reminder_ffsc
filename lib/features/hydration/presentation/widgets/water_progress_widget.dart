@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:water/features/hydration/presentation/widgets/echelle_gauche_widget.dart';
+import 'package:water/features/hydration/presentation/widgets/entete_widget.dart';
+import 'package:water/features/hydration/presentation/widgets/verre_widget.dart';
 
 class WaterProgressWidget extends StatelessWidget{
   final int valuerConsommee;
@@ -20,12 +23,12 @@ class WaterProgressWidget extends StatelessWidget{
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           /// ÉCHELLE
+          EchelleGaucheWidget(objectifJournalier:objectifJournalier),
 
 
           /// VERRE
-
+          VerreWidget(progression: valuerConsommee/objectifJournalier, valuerConsommee: valuerConsommee),
 
           const SizedBox(width: 20),
         ],

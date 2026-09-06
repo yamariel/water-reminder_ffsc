@@ -1,10 +1,15 @@
+import '../../data/models/hydration_record.dart';
+
 abstract class HydrationRepository {
-  //Ajouter de l'eau
+  // Ajouter une consommation d'eau
   Future<void> addWater(int amount);
 
-  //Récupérer le total d'eau bue aujourd'hui
+  // Récupérer le volume total d'eau bue aujourd'hui
   Future<int> getTodayWater();
 
-  //Réinitialiser le compteur à zéro
+  // Réinitialiser la consommation du jour à zéro
   Future<void> clearTodayWater();
+
+  // Récupérer tout l'historique des consommations
+  Future<List<HydrationRecord>> getHistory();
 }

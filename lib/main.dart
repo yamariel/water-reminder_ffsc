@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'core/theme/app_theme.dart';
 import 'core/database/hive_setup.dart';
 import 'core/notifications/notification_service.dart';
 import 'core/presentation/main_screen.dart';
@@ -23,7 +23,9 @@ class WaterReminderApp extends StatelessWidget {
       title: 'WaterReminder',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppTheme.primaryBlue),
+        scaffoldBackgroundColor: AppTheme.backgroundBlue,
+        textTheme: AppTheme.theme.textTheme,
         useMaterial3: true,
       ),
       home: const MainScreen(),

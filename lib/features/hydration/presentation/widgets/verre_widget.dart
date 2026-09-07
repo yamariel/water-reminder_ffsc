@@ -14,7 +14,7 @@ class VerreWidget extends StatelessWidget {
       painter: PeintreVerreWidget(progression: progression),
       child: SizedBox(
           height: 360,
-          width: 180,
+          width: 300,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 80),
@@ -22,7 +22,7 @@ class VerreWidget extends StatelessWidget {
                 '${valuerConsommee}ml',
                 style: const TextStyle(
                   color: Colors.blueAccent,
-                  fontSize: 34,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(

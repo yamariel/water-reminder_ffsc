@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:water/features/hydration/presentation/widgets/boutons_rapid_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/echelle_gauche_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/entete_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/verre_widget.dart';
@@ -29,8 +30,6 @@ class WaterProgressWidget extends StatelessWidget{
 
           /// VERRE
           VerreWidget(progression: valuerConsommee/objectifJournalier, valuerConsommee: valuerConsommee),
-
-          const SizedBox(width: 20),
         ],
       ),
     );

@@ -22,12 +22,7 @@ class WaterReminderApp extends StatelessWidget {
     return MaterialApp(
       title: 'WaterReminder',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppTheme.primaryBlue),
-        scaffoldBackgroundColor: AppTheme.backgroundBlue,
-        textTheme: AppTheme.theme.textTheme,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.theme,
       home: const MainScreen(),
     );
   }

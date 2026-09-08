@@ -14,13 +14,16 @@ class WaterHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -29,13 +32,13 @@ class WaterHistoryItem extends StatelessWidget {
           Container(
             width: 48,
             height: 48,
-            decoration: const BoxDecoration(
-              color: Color(0xFFE3F2FD),
+            decoration: BoxDecoration(
+              color: colorScheme.primary.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.water_drop,
-              color: Colors.blue,
+              color: colorScheme.primary,
               size: 28,
             ),
           ),
@@ -44,37 +47,29 @@ class WaterHistoryItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Eau',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: theme.textTheme.titleMedium,
               ),
               Text(
                 time,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
+                style: theme.textTheme.bodyMedium,
               ),
             ],
           ),
           const Spacer(),
           Text(
             '+$amount ml',
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: colorScheme.primary,
             ),
           ),
           const SizedBox(width: 16),
           IconButton(
             onPressed: onDelete,
-            icon: const Icon(
+            icon: Icon(
               Icons.delete_outline,
-              color: Colors.grey,
+              color: colorScheme.onSurfaceVariant,
             ),
           ),
         ],

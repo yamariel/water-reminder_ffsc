@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water/core/theme/app_theme.dart';
 
 class WaterHistoryItem extends StatelessWidget {
   final String time;
@@ -14,16 +15,13 @@ class WaterHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        color: theme.cardColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -32,13 +30,13 @@ class WaterHistoryItem extends StatelessWidget {
           Container(
             width: 48,
             height: 48,
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withValues(alpha: 0.12),
+            decoration: const BoxDecoration(
+              color: AppTheme.backgroundBlue,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.water_drop,
-              color: colorScheme.primary,
+              color: AppTheme.primaryBlue,
               size: 28,
             ),
           ),
@@ -47,29 +45,38 @@ class WaterHistoryItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Eau',
-                style: theme.textTheme.titleMedium,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.primaryText,
+                ),
               ),
               Text(
                 time,
-                style: theme.textTheme.bodyMedium,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppTheme.mutedText,
+                ),
               ),
             ],
           ),
           const Spacer(),
           Text(
             '+$amount ml',
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: colorScheme.primary,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.primaryBlue,
             ),
           ),
           const SizedBox(width: 16),
           IconButton(
             onPressed: onDelete,
-            icon: Icon(
+            icon: const Icon(
               Icons.delete_outline,
-              color: colorScheme.onSurfaceVariant,
+              color: AppTheme.mutedText,
             ),
           ),
         ],

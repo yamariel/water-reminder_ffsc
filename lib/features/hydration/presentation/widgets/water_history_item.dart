@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water/core/theme/app_theme.dart';
 
 class WaterHistoryItem extends StatelessWidget {
   final String time;
@@ -30,12 +31,12 @@ class WaterHistoryItem extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: const BoxDecoration(
-              color: Color(0xFFE3F2FD),
+              color: AppTheme.backgroundBlue,
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.water_drop,
-              color: Colors.blue,
+              color: AppTheme.primaryBlue,
               size: 28,
             ),
           ),
@@ -49,13 +50,14 @@ class WaterHistoryItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: AppTheme.primaryText,
                 ),
               ),
               Text(
                 time,
                 style: const TextStyle(
                   fontSize: 14,
-                  color: Colors.grey,
+                  color: AppTheme.mutedText,
                 ),
               ),
             ],
@@ -66,7 +68,7 @@ class WaterHistoryItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: AppTheme.primaryBlue,
             ),
           ),
           const SizedBox(width: 16),
@@ -74,7 +76,7 @@ class WaterHistoryItem extends StatelessWidget {
             onPressed: onDelete,
             icon: const Icon(
               Icons.delete_outline,
-              color: Colors.grey,
+              color: AppTheme.mutedText,
             ),
           ),
         ],

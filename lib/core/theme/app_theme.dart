@@ -5,8 +5,7 @@ class AppTheme {
   static const Color backgroundBlue = Color(0xFFEAF3FF);
   static const Color primaryText = Color(0xFF172033);
   static const Color mutedText = Color(0xFF6B7280);
-  static const Color waterBlue = Color(0xFF69A8F7);
-  static const Color waterBlueLight = Color(0xFF9DCCFA);
+
   static final ThemeData theme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: backgroundBlue,

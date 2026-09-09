@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:water/features/hydration/presentation/widgets/boutons_rapid_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/echelle_gauche_widget.dart';
-import 'package:water/features/hydration/presentation/widgets/entete_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/verre_anime.dart';
-import 'package:water/features/hydration/presentation/widgets/verre_widget.dart';
 
 class WaterProgressWidget extends StatefulWidget {
   final int valuerConsommee;

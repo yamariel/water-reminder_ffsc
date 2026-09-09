@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:water/core/theme/app_theme.dart';
-import 'package:water/features/hydration/presentation/widgets/peintre_verre_widget.dart';
 import 'package:water_animation/water_animation.dart';
 
 /**
@@ -135,14 +134,14 @@ class _VerreAnimeState extends State<VerreAnime>
           speed: 1.5,
 
           // Couleur provenant du thème
-          waterColor: AppTheme.waterBlueLight,
+          // waterColor: AppTheme.waterBlueLight,
 
-          // Gradient
-          gradientColors: [
-            AppTheme.waterBlueLight,
-            AppTheme.waterBlueLight,
-            AppTheme.waterBlueLight,
-          ],
+          // Gradient-Utiliser le theme
+          // gradientColors: [
+          //   AppTheme.waterBlueLight,
+          //   AppTheme.waterBlueLight,
+          //   AppTheme.waterBlueLight,
+          // ],
 
           enableRipple: true,
           enableShader: true,
@@ -162,7 +161,7 @@ class _VerreAnimeState extends State<VerreAnime>
             // color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(30),
             border: Border.all(
-              color: theme.colorScheme.primary,
+              // color: theme.colorScheme.primary,
               width: 5,
             ),
           ),

@@ -10,6 +10,10 @@ class WaterProgressWidget extends StatefulWidget {
   final int valuerConsommee;
   final int objectifJournalier;
 
+  /**
+   * @valuerConsommee valeur d'eau consommee durant la journee en cours
+   * @objectifJournalier l'objectif journalier defini
+   */
   const WaterProgressWidget({
     required this.valuerConsommee,
     required this.objectifJournalier,
@@ -67,6 +71,7 @@ class _WaterProgressWidgetState extends State<WaterProgressWidget> {
                   ),
                 ),
                 Expanded(
+
                   child: VerreAnime(
                     objectifJournalier: widget.objectifJournalier,
                     valuerConsommee: _valeurConsommee,

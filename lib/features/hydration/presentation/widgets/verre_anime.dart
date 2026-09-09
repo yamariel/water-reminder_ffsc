@@ -115,58 +115,59 @@ class _VerreAnimeState extends State<VerreAnime>
         // ),
 
         Expanded(
+        child: Padding(padding:const EdgeInsets.only(right: 10),
         child: WaterAnimation(
-        width: double.infinity,
-        height: double.infinity,
+          width: double.maxFinite,
+          height: double.infinity,
 
-        // Niveau d'eau
-        waterFillFraction: _ancienneProgression,
+          // Niveau d'eau
+          waterFillFraction: _ancienneProgression,
 
-        // Animation du remplissage
-        fillTransitionDuration:
-        const Duration(milliseconds: 1400),
-        fillTransitionCurve: Curves.easeInOutCubic,
+          // Animation du remplissage
+          fillTransitionDuration:
+          const Duration(milliseconds: 1400),
+          fillTransitionCurve: Curves.easeInOutCubic,
 
 
-        // Vagues
-        amplitude: 8,
-        frequency: 1,
-        speed: 1.5,
+          // Vagues
+          amplitude: 7,
+          frequency: 1.5,
+          speed: 1.5,
 
-        // Couleur provenant du thème
-        waterColor: AppTheme.waterBlueLight,
+          // Couleur provenant du thème
+          waterColor: AppTheme.waterBlueLight,
 
-        // Gradient
-        gradientColors: [
-          AppTheme.waterBlueLight,
-          AppTheme.waterBlueLight,
-          AppTheme.waterBlueLight,
-        ],
+          // Gradient
+          gradientColors: [
+            AppTheme.waterBlueLight,
+            AppTheme.waterBlueLight,
+            AppTheme.waterBlueLight,
+          ],
 
-        enableRipple: false,
-        enableShader: true,
+          enableRipple: true,
+          enableShader: true,
 
-        // Une deuxième vague
-        enableSecondWave: true,
-        secondWaveColor:AppTheme.waterBlueLight,
-    secondWaveAmplitude: 5,
-    secondWaveFrequency: 1.5,
-    secondWaveSpeed: 1,
+          // Une deuxième vague
+          // enableSecondWave: true,
+          // secondWaveColor:AppTheme.waterBlueLight,
+          secondWaveAmplitude: 5,
+          secondWaveFrequency: 1.5,
+          secondWaveSpeed: 1,
 
-    // Vagues plus naturelles
-    realisticWave: true,
+          // Vagues plus naturelles
+          realisticWave: true,
 
-    // Conteneur
-    decoration: BoxDecoration(
-    color: theme.colorScheme.surface,
-      borderRadius: BorderRadius.circular(30),
-      border: Border.all(
-        color: theme.colorScheme.primary,
-        width: 5,
-      ),
-    ),
+          // Conteneur
+          decoration: BoxDecoration(
+            // color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: theme.colorScheme.primary,
+              width: 5,
+            ),
+          ),
         ),
-        ),
+            ) ),
       ],
     );
   }

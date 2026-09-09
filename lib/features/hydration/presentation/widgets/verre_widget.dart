@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:water/core/theme/app_theme.dart';
 import 'package:water/features/hydration/presentation/widgets/peintre_verre_widget.dart';
 
 class VerreWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class VerreWidget extends StatelessWidget {
               child: Text(
                 '${valuerConsommee}ml',
                 style: const TextStyle(
-                  color: Colors.blueAccent,
+                  color:AppTheme.waterBlueLight,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   shadows: [

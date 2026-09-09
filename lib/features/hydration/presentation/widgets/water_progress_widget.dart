@@ -90,8 +90,8 @@ class _WaterProgressWidgetState extends State<WaterProgressWidget> {
           //
           //     // const Text('Progression', style: TextStyle(fontSize: 14)),
           //
-          //     const SizedBox(height: 8),
-          //
+          //     // const SizedBox(height: 8),
+          //     //
           //     // ElevatedButton(
           //     //   onPressed: _ajouterEau,
           //     //   child: const Text('+ 250 ml'),

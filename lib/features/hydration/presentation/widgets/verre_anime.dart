@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:water/core/theme/app_theme.dart';
 import 'package:water/features/hydration/presentation/widgets/peintre_verre_widget.dart';
+import 'package:water_animation/water_animation.dart';
 
 /**
  * Ce widget gerera lanimation du verre
@@ -98,18 +100,72 @@ class _VerreAnimeState extends State<VerreAnime>
           ),
         ),
 
-        AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return SizedBox(
-              width: double.maxFinite,
-              height: 300,
+        // AnimatedBuilder(
+        //   animation: _animation,
+        //   builder: (context, child) {
+        //     return SizedBox(
+        //       width: double.maxFinite,
+        //       height: 300,
+        //
+        //       child: CustomPaint(
+        //         painter: PeintreVerreWidget(progression: _animation.value),
+        //       ),
+        //     );
+        //   },
+        // ),
 
-              child: CustomPaint(
-                painter: PeintreVerreWidget(progression: _animation.value),
-              ),
-            );
-          },
+        Expanded(
+        child: WaterAnimation(
+        width: double.infinity,
+        height: double.infinity,
+
+        // Niveau d'eau
+        waterFillFraction: _ancienneProgression,
+
+        // Animation du remplissage
+        fillTransitionDuration:
+        const Duration(milliseconds: 1400),
+        fillTransitionCurve: Curves.easeInOutCubic,
+
+
+        // Vagues
+        amplitude: 8,
+        frequency: 1,
+        speed: 1.5,
+
+        // Couleur provenant du thème
+        waterColor: AppTheme.waterBlueLight,
+
+        // Gradient
+        gradientColors: [
+          AppTheme.waterBlueLight,
+          AppTheme.waterBlueLight,
+          AppTheme.waterBlueLight,
+        ],
+
+        enableRipple: false,
+        enableShader: true,
+
+        // Une deuxième vague
+        enableSecondWave: true,
+        secondWaveColor:AppTheme.waterBlueLight,
+    secondWaveAmplitude: 5,
+    secondWaveFrequency: 1.5,
+    secondWaveSpeed: 1,
+
+    // Vagues plus naturelles
+    realisticWave: true,
+
+    // Conteneur
+    decoration: BoxDecoration(
+    color: theme.colorScheme.surface,
+      borderRadius: BorderRadius.circular(30),
+      border: Border.all(
+        color: theme.colorScheme.primary,
+        width: 5,
+      ),
+    ),
+        ),
         ),
       ],
     );

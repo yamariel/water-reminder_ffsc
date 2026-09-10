@@ -4,16 +4,10 @@ part 'hydration_record.g.dart';
 
 // vu qu'on va stocker su du JSON :
 
-@HiveType(typeId: 1) // Optionnel mais la dans la mesure on veut l'ameliorer l'app pour diverses boissons d'eau j'ai pensé aq ceci on peut enlever hein les gars a vous de voir
+@HiveType(typeId: 1)
 enum DrinkType {
   @HiveField(0)
   water,
-  @HiveField(1)
-  tea,
-  @HiveField(2)
-  coffee,
-  @HiveField(3)
-  other,
 }
 
 // Ici si on pars sur le principe que l'utilisateur va faire une entree du genre : "j'ai bu X quantite d'eau a telle date "

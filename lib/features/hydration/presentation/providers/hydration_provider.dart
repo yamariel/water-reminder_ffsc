@@ -8,18 +8,18 @@ final hydrationRepositoryProvider = Provider<HydrationRepository>((ref) {
 });
 
 class HydrationState {
-  final int todayTotalMl;
+  final int todayTotalM1;
   final List<HydrationRecord> history;
   final bool isLoading;
 
   const HydrationState({
-    required this.todayTotalMl,
+    required this.todayTotalM1,
     required this.history,
     this.isLoading = false,
   });
 
   factory HydrationState.initial() =>
-      const HydrationState(todayTotalMl: 0, history: [], isLoading: true);
+      const HydrationState(todayTotalM1: 0, history: [], isLoading: true);
 
   HydrationState copyWith({
     int? todayTotalMl,
@@ -27,7 +27,7 @@ class HydrationState {
     bool? isLoading,
   }) {
     return HydrationState(
-      todayTotalMl: todayTotalMl ?? this.todayTotalMl,
+      todayTotalM1: todayTotalMl ?? todayTotalM1,
       history: history ?? this.history,
       isLoading: isLoading ?? this.isLoading,
     );

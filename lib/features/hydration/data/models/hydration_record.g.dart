@@ -55,12 +55,7 @@ class DrinkTypeAdapter extends TypeAdapter<DrinkType> {
     switch (reader.readByte()) {
       case 0:
         return DrinkType.water;
-      case 1:
-        return DrinkType.tea;
-      case 2:
-        return DrinkType.coffee;
-      case 3:
-        return DrinkType.other;
+
       default:
         return DrinkType.water;
     }
@@ -71,15 +66,6 @@ class DrinkTypeAdapter extends TypeAdapter<DrinkType> {
     switch (obj) {
       case DrinkType.water:
         writer.writeByte(0);
-        break;
-      case DrinkType.tea:
-        writer.writeByte(1);
-        break;
-      case DrinkType.coffee:
-        writer.writeByte(2);
-        break;
-      case DrinkType.other:
-        writer.writeByte(3);
         break;
     }
   }

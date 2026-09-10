@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryBlue = Color(0xFF287BEA);
+  static const Color primaryBlue = Color(0xFF2454D8);
   static const Color backgroundBlue = Color(0xFFEAF3FF);
+  static const Color selectedBlue = Color(0xFFD7E2FA);
   static const Color primaryText = Color(0xFF172033);
   static const Color mutedText = Color(0xFF6B7280);
+
+  static const Color waterBlue = Color(0xFF69A8F7);
+  static const Color waterBlueLight = Color(0xFF9DCCFA);
+
+  static const Color goalCardBlueLight = Color(0xFF5FA3F3);
+  static const Color sliderInactive = Color(0xFFDDE2EC);
+  static const Color wakeUpOrange = Color(0xFFFF9800);
+  static const Color dividerGray = Color(0xFF909092);
 
   static final ThemeData theme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: backgroundBlue,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryBlue,
-      brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      primary: primaryBlue,
+      onPrimary: Colors.white,
+      primaryContainer: selectedBlue,
+      onPrimaryContainer: primaryText,
+      secondary: primaryBlue,
+      onSecondary: Colors.white,
+      surface: backgroundBlue,
+      onSurface: primaryText,
+      onSurfaceVariant: mutedText,
+      outline: Color(0xFF6F7785),
     ),
     textTheme: const TextTheme(
       headlineSmall: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/theme/app_theme.dart';
 import '../../enums/gender_enum.dart';
 import '../providers/settings_provider.dart';
 
@@ -17,7 +18,7 @@ class SettingsPage extends ConsumerWidget {
     return SafeArea(
       bottom: false,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(22, 8, 22, 2),
+        padding: const EdgeInsets.fromLTRB(22, 12, 22, 6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,16 +28,16 @@ class SettingsPage extends ConsumerWidget {
                 style: textTheme.headlineSmall?.copyWith(fontSize: 20),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             _DailyGoalCard(goal: settings.dailyGoal),
-            const SizedBox(height: 14),
+            const SizedBox(height: 18),
             Text('Genre', style: textTheme.titleMedium?.copyWith(fontSize: 15)),
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             _GenderSelector(
               selectedGender: settings.gender,
               onChanged: notifier.updateGender,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 16),
             Text(
               'Poids (kg)',
               style: textTheme.titleMedium?.copyWith(fontSize: 15),
@@ -47,6 +48,9 @@ class SettingsPage extends ConsumerWidget {
                   child: SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       trackHeight: 4,
+                      activeTrackColor: colors.primary,
+                      inactiveTrackColor: AppTheme.sliderInactive,
+                      thumbColor: colors.primary,
                       thumbShape: const RoundSliderThumbShape(
                         enabledThumbRadius: 10,
                       ),
@@ -74,15 +78,15 @@ class SettingsPage extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Text(
               'Rythme quotidien',
               style: textTheme.titleMedium?.copyWith(fontSize: 15),
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 6),
             _TimeSettingTile(
               icon: Icons.wb_sunny_outlined,
-              iconColor: colors.secondary,
+              iconColor: AppTheme.wakeUpOrange,
               label: 'Heure de réveil',
               time: settings.wakeUpTime,
               onTap: () async {
@@ -90,7 +94,11 @@ class SettingsPage extends ConsumerWidget {
                 if (time != null) notifier.updateWakeUpTime(time);
               },
             ),
-            const Divider(height: 1),
+            const Divider(
+              height: 1,
+              thickness: 0.65,
+              color: AppTheme.dividerGray,
+            ),
             _TimeSettingTile(
               icon: Icons.nightlight_outlined,
               iconColor: colors.primary,
@@ -101,7 +109,7 @@ class SettingsPage extends ConsumerWidget {
                 if (time != null) notifier.updateBedTime(time);
               },
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -113,7 +121,7 @@ class SettingsPage extends ConsumerWidget {
                         'Rappels d’hydratation',
                         style: textTheme.titleMedium?.copyWith(fontSize: 15),
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 4),
                       Text(
                         'Un rappel toutes les ${settings.reminderIntervalMinutes} minutes pendant l’éveil',
                         style: textTheme.bodyMedium,
@@ -150,17 +158,16 @@ class _DailyGoalCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            colors.primary,
-            Color.lerp(colors.primary, colors.onPrimary, 0.35)!,
-          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: const [AppTheme.primaryBlue, AppTheme.goalCardBlueLight],
         ),
         borderRadius: BorderRadius.circular(22),
       ),
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
           child: Column(
             children: [
               Text(
@@ -170,7 +177,7 @@ class _DailyGoalCard extends StatelessWidget {
                   fontSize: 13,
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               Text(
                 '$goal ml',
                 style: TextStyle(
@@ -179,9 +186,9 @@ class _DailyGoalCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 6),
               Text(
-                'Calculé selon votre poids et votre rythme d’éveil',
+                'Calculé selon votre poids, votre genre et votre rythme d’éveil',
                 style: TextStyle(
                   color: colors.onPrimary.withValues(alpha: 0.7),
                   fontSize: 10,
@@ -315,7 +322,7 @@ class _TimeSettingTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 7),
+        padding: const EdgeInsets.symmetric(vertical: 9),
         child: Row(
           children: [
             Icon(icon, color: iconColor, size: 23),
@@ -328,7 +335,7 @@ class _TimeSettingTile extends StatelessWidget {
               ),
             ),
             Text(
-              time.format(context),
+              _formatFrenchTime(time),
               style: Theme.of(context).textTheme.bodyMedium
                   ?.copyWith(fontSize: 12),
             ),
@@ -337,6 +344,12 @@ class _TimeSettingTile extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatFrenchTime(TimeOfDay time) {
+  final hour = time.hour.toString().padLeft(2, '0');
+  final minute = time.minute.toString().padLeft(2, '0');
+  return '$hour:$minute';
 }
 
 Future<TimeOfDay?> _pickTime(BuildContext context, TimeOfDay initialTime) {

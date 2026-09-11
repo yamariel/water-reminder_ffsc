@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 /***
  * Ce widget construira l'echelle de gauche qui sera graduée et montrera le niveau de progresion
  */
-class EchelleGaucheWidget extends StatelessWidget {
-  final int objectifJournalier;
+class LeftScaleWidget extends StatelessWidget {
+  final int goalOfTheDay;
 
-  const EchelleGaucheWidget({required this.objectifJournalier});
+  const LeftScaleWidget({required this.goalOfTheDay,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class EchelleGaucheWidget extends StatelessWidget {
           // Ajoute un espace de 10 pixels uniquement sur le côté gauche.
           padding: const EdgeInsets.only(left: 10),
           child: Text(
-            '${objectifJournalier} ml',
+            '${goalOfTheDay} ml',
             //Le style est a changé selon le theme
             // Définit le style du texte.
             style: const TextStyle(

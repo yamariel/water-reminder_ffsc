@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:water/features/hydration/presentation/widgets/echelle_gauche_widget.dart';
-import 'package:water/features/hydration/presentation/widgets/verre_anime.dart';
+import 'package:water/features/hydration/presentation/widgets/left_scale_widget.dart';
+import 'package:water/features/hydration/presentation/widgets/glass_anime_widget.dart';
 
 class WaterProgressWidget extends StatefulWidget {
-  final int valuerConsommee;
-  final int objectifJournalier;
+  final int consumedValue;
+  final int goalOfTheDay;
 
   /**
    * @valuerConsommee valeur d'eau consommee durant la journee en cours
    * @objectifJournalier l'objectif journalier defini
    */
   const WaterProgressWidget({
-    required this.valuerConsommee,
-    required this.objectifJournalier,
+    required this.consumedValue,
+    required this.goalOfTheDay,
+    super.key
   });
 
   @override
@@ -26,29 +27,10 @@ class _WaterProgressWidgetState extends State<WaterProgressWidget> {
   void initState() {
     super.initState();
 
-    _valeurConsommee = widget.valuerConsommee;
+    _valeurConsommee = widget.consumedValue;
   }
-
-  void _ajouterEau() {
-    setState(() {
-      _valeurConsommee += 250;
-
-      // Empêche de dépasser l'objectif
-      if (_valeurConsommee > widget.objectifJournalier) {
-        _valeurConsommee = widget.objectifJournalier;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    //Calculer le procentage de progression
-
-    final double progression = (_valeurConsommee / widget.objectifJournalier)
-        .clamp(0.0, 1.0);
-
-    final int pourcentage = (progression * 100).round();
-
     //final double progression=(valuerConsommee/objectifJournalier).clamp(0.0, 1.0);
     return SizedBox(
       height: 450,
@@ -63,51 +45,23 @@ class _WaterProgressWidgetState extends State<WaterProgressWidget> {
               children: [
                 SizedBox(
                   width: 60,
-                  child: EchelleGaucheWidget(
-                    objectifJournalier: widget.objectifJournalier,
+                  child: LeftScaleWidget(
+                    goalOfTheDay: widget.goalOfTheDay,
                   ),
                 ),
                 Expanded(
 
-                  child: VerreAnime(
-                    objectifJournalier: widget.objectifJournalier,
-                    valuerConsommee: _valeurConsommee,
+                  child: GlassAnimeWidget(
+                    goalOfTheDay: widget.goalOfTheDay,
+                    consumedValue: _valeurConsommee,
                   ),
                 ),
               ],
             ),
           ),
-
-          /// ZONE DU BAS
-          // Column(
-          //   mainAxisSize: MainAxisSize.max,
-          //   children: [
-          //     Text(
-          //       '$pourcentage%',
-          //       style: const TextStyle(
-          //         fontSize: 24,
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //     ),
-          //
-          //     // const Text('Progression', style: TextStyle(fontSize: 14)),
-          //
-          //     // const SizedBox(height: 8),
-          //     //
-          //     // ElevatedButton(
-          //     //   onPressed: _ajouterEau,
-          //     //   child: const Text('+ 250 ml'),
-          //     // ),
-          //   ],
-          // ),
         ],
       ),
     );
   }
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
 }

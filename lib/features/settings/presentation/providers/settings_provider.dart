@@ -68,6 +68,7 @@ class UserSettingsNotifier extends Notifier<UserSettings> {
 
   //Mettre à jour du couché
   void updateBedTime(TimeOfDay newTime) {
+    state = state.copyWith(bedTime: newTime);
     _updateAndSave(state.copyWith(bedTime: newTime));
   }
 

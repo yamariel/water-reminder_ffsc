@@ -1,63 +1,109 @@
 import 'package:flutter/material.dart';
 
-/***
- * Ce widget construira l'echelle de gauche qui sera graduée et montrera le niveau de progresion
- */
+/// Échelle verticale représentant le niveau d'hydratation.
+///
+/// Les grandes graduations affichent une valeur.
+/// Les petites graduations servent uniquement de repère visuel.
 class LeftScaleWidget extends StatelessWidget {
   final int goalOfTheDay;
 
-  const LeftScaleWidget({required this.goalOfTheDay,super.key});
+  const LeftScaleWidget({
+    required this.goalOfTheDay,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    // Nombre d'intervalles sur l'échelle.
+    const int numberOfGraduations = 8;
+
+    // Valeur entre deux graduations.
+    final double graduationValue =
+        goalOfTheDay / numberOfGraduations;
+
     return Column(
       children: [
-        Padding(
-          // Ajoute un espace de 10 pixels uniquement sur le côté gauche.
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            '${goalOfTheDay} ml',
-            //Le style est a changé selon le theme
-            // Définit le style du texte.
-            style: const TextStyle(
-              // Définit la couleur du texte en blanc.
-              color: Colors.blueAccent,
+        // ==================================================
+        // OBJECTIF
+        // ==================================================
 
-              // Définit la taille du texte à 22 pixels.
-              fontSize: 22,
-
-              // Rend le texte plus épais (gras).
-              fontWeight: FontWeight.bold,
-            ),
+        Text(
+          '$goalOfTheDay ml',
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: theme.colorScheme.primary,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        // Ajoute un espace vertical de 10 pixels entre l'objectif journalier  et les graduations.
+
         const SizedBox(height: 10),
-        // Génère automatiquement une liste de 12 éléments.
-        // Ici, chaque élément correspond à une graduation de l'échelle.
-        ...List.generate(
-          12,
-          // "index" représente la position de chaque élément.
-          // Les valeurs seront : 0, 1, 2, ..., 11.
-          (index) {
-            return Container(
-              // Définit les marges autour de chaque graduation.
-              margin: const EdgeInsets.only(
-                // Décale chaque graduation de 10 pixels vers la droite.
-                left: 10,
-                // Ajoute un espace de 17 pixels sous chaque graduation.
-                bottom: 17,
-              ),
-              // Définit la largeur de la graduation.
-              // Si index est un multiple de 5 (0, 5, 10),la graduation est plus longue : 38 pixels.
-              // Pour les autres graduations, elle mesure 25 pixels.
-              width: index % 5 == 0 ? 38 : 25,
-              // Définit l'épaisseur de la graduation à 2 pixels.
-              height: 2,
-              // Définit la couleur de la graduation. changer selon le theme
-              color: Colors.blueAccent,
-            );
-          },
+
+        // ==================================================
+        // ÉCHELLE
+        // ==================================================
+
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              numberOfGraduations + 1,
+                  (index) {
+                final double value =
+                    goalOfTheDay -
+                        (graduationValue * index);
+
+                // Une graduation sur deux est principale.
+                final bool isMainGraduation =
+                    index % 2 == 0;
+
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // --------------------------------------
+                    // VALEUR
+                    // --------------------------------------
+
+                    SizedBox(
+                      width: 50,
+                      child: isMainGraduation
+                          ? Text(
+                        '${value.round()}',
+                        textAlign: TextAlign.right,
+                        style: theme
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
+                          color: theme
+                              .colorScheme
+                              .primary,
+                        ),
+                      )
+                          : null,
+                    ),
+
+                    const SizedBox(width: 5),
+
+                    // --------------------------------------
+                    // TRAIT
+                    // --------------------------------------
+
+                    Container(
+                      width: isMainGraduation
+                          ? 30
+                          : 20,
+                      height: 2,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
+                        borderRadius:
+                        BorderRadius.circular(2),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
         ),
       ],
     );

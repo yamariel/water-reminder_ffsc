@@ -2,152 +2,200 @@ import 'package:flutter/material.dart';
 import 'package:water/core/theme/app_theme.dart';
 import 'package:water_animation/water_animation.dart';
 
-/**
- * Ce widget gerera lanimation du verre
- */
-class GlassAnimeWidget extends StatefulWidget {
+import 'glass_clipper.dart';
+import 'glass_painter.dart';
+
+/// Widget représentant le verre d'eau.
+///
+/// Responsabilités :
+/// - afficher la quantité consommée ;
+/// - calculer la progression ;
+/// - afficher l'eau animée ;
+/// - appliquer la forme du verre ;
+/// - afficher le contour et les reflets.
+///
+/// L'animation du niveau d'eau est entièrement gérée
+/// par le package `water_animation`.
+class GlassAnimeWidget extends StatelessWidget {
+  /// Objectif quotidien en millilitres.
   final int goalOfTheDay;
+
+  /// Quantité d'eau actuellement consommée.
   final int consumedValue;
 
-  GlassAnimeWidget({
+  const GlassAnimeWidget({
+    super.key,
     required this.goalOfTheDay,
     required this.consumedValue,
-    super.key,
   });
 
-  @override
-  State<StatefulWidget> createState() => _GlassAnimeWidgetState();
-}
-
-/**
- * Un Ticker agit comme le battement de cœur d'une animation :
- * il déclenche un signal à chaque rafraîchissement d'écran de l'appareil (généralement 60 ou 120 fois par seconde)
- * en transmettant le temps écoulé, ce qui permet de calculer le rendu image par image
- * .
- */
-class _GlassAnimeWidgetState extends State<GlassAnimeWidget>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late Animation<double> _animation;
-
-  /// Progression actuellement affichée par l'animation.
-  late double _ancienneProgression =
-      (widget.consumedValue / widget.goalOfTheDay).clamp(0.0, 1.0);
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-      animationBehavior: AnimationBehavior.normal,
-    );
-    _animation = Tween<double>(
-      begin: 0.0,
-      end: widget.consumedValue / widget.goalOfTheDay,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-    _controller.forward();
-  }
-
-  /// Calcule la progression entre 0 et 1.
-  double _calculerProgression() {
-    if (widget.goalOfTheDay <= 0) {
+  /// Calcule le pourcentage de remplissage du verre.
+  ///
+  /// La valeur retournée est toujours comprise entre 0 et 1.
+  double _calculateProgress() {
+    // Évite une division par zéro.
+    if (goalOfTheDay <= 0) {
       return 0.0;
     }
 
-    return (widget.consumedValue / widget.goalOfTheDay).clamp(0.0, 1.0);
-  }
-
-  /// Appelé lorsque les paramètres du widget changent.
-  @override
-  void didUpdateWidget(covariant GlassAnimeWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.consumedValue != widget.consumedValue ||
-        oldWidget.goalOfTheDay != widget.goalOfTheDay) {
-      final double nouvelleProgression = _calculerProgression();
-
-      _animation = Tween<double>(
-        begin: _ancienneProgression,
-        end: nouvelleProgression,
-      ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-      _ancienneProgression = nouvelleProgression;
-
-      /// On recommence l'animation.
-      _controller
-        ..reset()
-        ..forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+    return (
+        consumedValue / goalOfTheDay
+    ).clamp(0.0, 1.0);
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
+
+    // Progression actuelle du verre.
+    final double progression = _calculateProgress();
 
     return Column(
       children: [
+        // ==================================================
+        // QUANTITÉ CONSOMMÉE
+        // ==================================================
+
         Text(
-          '${widget.consumedValue} ml',
-          style: theme.textTheme.labelMedium?.copyWith(
+          '$consumedValue ml',
+          style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
-            color: theme.colorScheme.onPrimaryContainer,
+            color: theme.colorScheme.onSurface,
           ),
         ),
+
+        const SizedBox(height: 8),
+
+        // ==================================================
+        // VERRE
+        // ==================================================
+
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: WaterAnimation(
-              width: double.maxFinite,
-              height: double.infinity,
+            padding: const EdgeInsets.only(
+              right: 10,
+            ),
+            child: Stack(
+              children: [
+                // ==================================================
+                // EAU
+                // ==================================================
 
-              // Niveau d'eau
-              waterFillFraction: _ancienneProgression,
+                Positioned.fill(
+                  child: ClipPath(
+                    clipper: GlassClipper(),
+                    child: WaterAnimation(
+                      width: double.infinity,
+                      height: double.infinity,
 
-              // Animation du remplissage
-              fillTransitionDuration: const Duration(milliseconds: 1400),
-              fillTransitionCurve: Curves.easeInOutCubic,
+                      // ------------------------------------------
+                      // NIVEAU D'EAU
+                      // ------------------------------------------
 
-              // Vagues
-              amplitude: 7,
-              frequency: 1.5,
-              speed: 1.5,
+                      // 0.0 = verre vide
+                      // 0.5 = 50 %
+                      // 1.0 = verre plein
+                      waterFillFraction: progression,
 
-              // Couleur provenant du thème
-              waterColor: AppTheme.waterBlueLight,
+                      // ------------------------------------------
+                      // ANIMATION DU REMPLISSAGE
+                      // ------------------------------------------
 
-              // Gradient-Utiliser le theme
-              gradientColors: [
-                AppTheme.waterBlueLight,
-                AppTheme.waterBlueLight,
-                AppTheme.waterBlueLight,
+                      // Animation volontairement douce.
+                      fillTransitionDuration:
+                      const Duration(
+                        milliseconds: 1400,
+                      ),
+
+                      fillTransitionCurve:
+                      Curves.easeInOutCubic,
+
+                      // ------------------------------------------
+                      // VAGUE PRINCIPALE
+                      // ------------------------------------------
+
+                      // Petite amplitude pour éviter
+                      // un effet "océan".
+                      amplitude: 7,
+                      // Nombre de vagues.
+                      frequency: 1.5,
+                      // Vitesse de déplacement.
+                      speed: 1.2,
+
+                      // ------------------------------------------
+                      // COULEUR DE L'EAU
+                      // ------------------------------------------
+
+                      waterColor:
+                      AppTheme.waterBlue,
+
+                      // Gradient vertical.
+                      gradientColors: [
+                        AppTheme.waterBlueLight,
+                        AppTheme.waterBlue,
+                        AppTheme.primaryBlue,
+                      ],
+
+                      // ------------------------------------------
+                      // RIPPLE
+                      // ------------------------------------------
+
+                      // Désactivé pour avoir une animation
+                      // plus calme.
+                      enableRipple: false,
+
+                      // Active le rendu avec shader.
+                      enableShader: true,
+
+                      // ------------------------------------------
+                      // DEUXIÈME VAGUE
+                      // ------------------------------------------
+
+                      enableSecondWave: true,
+
+                      secondWaveColor:
+                      AppTheme.waterBlueLight.withValues(
+                        alpha: 0.30,
+                      ),
+
+                      secondWaveAmplitude: 4,
+
+                      secondWaveFrequency: 1.5,
+
+                      secondWaveSpeed: 0.8,
+
+                      // ------------------------------------------
+                      // VAGUE RÉALISTE
+                      // ------------------------------------------
+
+                      realisticWave: true,
+
+                      // IMPORTANT :
+                      // aucune bordure arrondie ici.
+                      //
+                      // C'est GlassClipper qui donne
+                      // la véritable forme du verre.
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // ==================================================
+                // CONTOUR + REFLETS DU VERRE
+                // ==================================================
+
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: CustomPaint(
+                      painter: GlassPainter(
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ),
               ],
-
-              enableRipple: true,
-              enableShader: true,
-
-              // Une deuxième vague
-              enableSecondWave: true,
-              secondWaveColor: AppTheme.waterBlueLight,
-              secondWaveAmplitude: 5,
-              secondWaveFrequency: 1.5,
-              secondWaveSpeed: 1,
-
-              // Vagues plus naturelles
-              realisticWave: true,
-
-              // Conteneur
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: theme.colorScheme.primary, width: 5),
-              ),
             ),
           ),
         ),

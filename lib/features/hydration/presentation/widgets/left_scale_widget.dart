@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-/***Échelle verticale représentant le niveau d'hydratation.
-Les grandes graduations affichent une valeur.
- Les petites graduations servent uniquement de repère visuel.
- **/
+///
+/// Échelle verticale représentant le niveau d'hydratation.
+/// Les grandes graduations affichent une valeur.
+/// Les petites graduations servent uniquement de repère visuel.
+///
 class LeftScaleWidget extends StatelessWidget {
   final int goalOfTheDay;
 

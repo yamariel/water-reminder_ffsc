@@ -25,7 +25,7 @@ class WaterProgressWidget extends StatelessWidget {
           SizedBox(
             width: 90,
             child: LeftScaleWidget(
-              goalOfTheDay: this.goalOfTheDay,
+              goalOfTheDay: goalOfTheDay,
             ),
           ),
           // Petit espace entre l'échelle et le verre.
@@ -33,8 +33,8 @@ class WaterProgressWidget extends StatelessWidget {
           SizedBox(
             width: 240,
             child: GlassAnimeWidget(
-              goalOfTheDay: this.goalOfTheDay,
-              consumedValue: this.consumedValue,
+              goalOfTheDay: goalOfTheDay,
+              consumedValue: consumedValue,
             ),
           ),
         ],

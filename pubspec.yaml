@@ -17,6 +17,8 @@ dependencies:
   hive_flutter: ^1.1.0
   intl: ^0.20.3
   shared_preferences: ^2.5.5
+  water_animation: ^0.0.3
+
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:water/features/hydration/presentation/widgets/left_scale_widget.dart';
 import 'package:water/features/hydration/presentation/widgets/glass_anime_widget.dart';
 
-class WaterProgressWidget extends StatefulWidget {
+class WaterProgressWidget extends StatelessWidget {
   final int consumedValue;
   final int goalOfTheDay;
 
@@ -15,58 +15,31 @@ class WaterProgressWidget extends StatefulWidget {
   });
 
   @override
-  State<WaterProgressWidget> createState() =>
-      _WaterProgressWidgetState();
-}
-
-class _WaterProgressWidgetState
-    extends State<WaterProgressWidget> {
-
-  late int _valeurConsommee;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _valeurConsommee = widget.consumedValue;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 450,
       width: double.infinity,
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // ==================================================
-          // ÉCHELLE
-          // ==================================================
-
           SizedBox(
             width: 90,
             child: LeftScaleWidget(
-              goalOfTheDay: widget.goalOfTheDay,
+              goalOfTheDay: this.goalOfTheDay,
             ),
           ),
-
           // Petit espace entre l'échelle et le verre.
           const SizedBox(width: 10),
-
-          // ==================================================
-          // VERRE
-          // ==================================================
-
           SizedBox(
             width: 240,
             child: GlassAnimeWidget(
-              goalOfTheDay: widget.goalOfTheDay,
-              consumedValue: _valeurConsommee,
+              goalOfTheDay: this.goalOfTheDay,
+              consumedValue: this.consumedValue,
             ),
           ),
         ],
       ),
     );
+
   }
 }

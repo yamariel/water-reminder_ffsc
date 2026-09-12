@@ -52,9 +52,6 @@ class GlassAnimeWidget extends StatelessWidget {
 
     return Column(
       children: [
-        // ==================================================
-        // QUANTITÉ CONSOMMÉE
-        // ==================================================
 
         Text(
           '$consumedValue ml',
@@ -65,11 +62,6 @@ class GlassAnimeWidget extends StatelessWidget {
         ),
 
         const SizedBox(height: 8),
-
-        // ==================================================
-        // VERRE
-        // ==================================================
-
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -77,30 +69,16 @@ class GlassAnimeWidget extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                // ==================================================
-                // EAU
-                // ==================================================
-
                 Positioned.fill(
                   child: ClipPath(
                     clipper: GlassClipper(),
                     child: WaterAnimation(
                       width: double.infinity,
                       height: double.infinity,
-
-                      // ------------------------------------------
-                      // NIVEAU D'EAU
-                      // ------------------------------------------
-
                       // 0.0 = verre vide
                       // 0.5 = 50 %
                       // 1.0 = verre plein
                       waterFillFraction: progression,
-
-                      // ------------------------------------------
-                      // ANIMATION DU REMPLISSAGE
-                      // ------------------------------------------
-
                       // Animation volontairement douce.
                       fillTransitionDuration:
                       const Duration(
@@ -109,11 +87,6 @@ class GlassAnimeWidget extends StatelessWidget {
 
                       fillTransitionCurve:
                       Curves.easeInOutCubic,
-
-                      // ------------------------------------------
-                      // VAGUE PRINCIPALE
-                      // ------------------------------------------
-
                       // Petite amplitude pour éviter
                       // un effet "océan".
                       amplitude: 7,
@@ -121,11 +94,6 @@ class GlassAnimeWidget extends StatelessWidget {
                       frequency: 1.5,
                       // Vitesse de déplacement.
                       speed: 1.2,
-
-                      // ------------------------------------------
-                      // COULEUR DE L'EAU
-                      // ------------------------------------------
-
                       waterColor:
                       AppTheme.waterBlue,
 
@@ -135,22 +103,12 @@ class GlassAnimeWidget extends StatelessWidget {
                         AppTheme.waterBlue,
                         AppTheme.primaryBlue,
                       ],
-
-                      // ------------------------------------------
-                      // RIPPLE
-                      // ------------------------------------------
-
                       // Désactivé pour avoir une animation
                       // plus calme.
                       enableRipple: false,
 
                       // Active le rendu avec shader.
                       enableShader: true,
-
-                      // ------------------------------------------
-                      // DEUXIÈME VAGUE
-                      // ------------------------------------------
-
                       enableSecondWave: true,
 
                       secondWaveColor:
@@ -163,11 +121,6 @@ class GlassAnimeWidget extends StatelessWidget {
                       secondWaveFrequency: 1.5,
 
                       secondWaveSpeed: 0.8,
-
-                      // ------------------------------------------
-                      // VAGUE RÉALISTE
-                      // ------------------------------------------
-
                       realisticWave: true,
 
                       // IMPORTANT :
@@ -181,11 +134,6 @@ class GlassAnimeWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // ==================================================
-                // CONTOUR + REFLETS DU VERRE
-                // ==================================================
-
                 Positioned.fill(
                   child: IgnorePointer(
                     child: CustomPaint(

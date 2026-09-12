@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Échelle verticale représentant le niveau d'hydratation.
-///
-/// Les grandes graduations affichent une valeur.
-/// Les petites graduations servent uniquement de repère visuel.
+/***Échelle verticale représentant le niveau d'hydratation.
+Les grandes graduations affichent une valeur.
+ Les petites graduations servent uniquement de repère visuel.
+ **/
 class LeftScaleWidget extends StatelessWidget {
   final int goalOfTheDay;
 
@@ -25,10 +25,6 @@ class LeftScaleWidget extends StatelessWidget {
 
     return Column(
       children: [
-        // ==================================================
-        // OBJECTIF
-        // ==================================================
-
         Text(
           '$goalOfTheDay ml',
           style: theme.textTheme.titleMedium?.copyWith(
@@ -38,11 +34,6 @@ class LeftScaleWidget extends StatelessWidget {
         ),
 
         const SizedBox(height: 10),
-
-        // ==================================================
-        // ÉCHELLE
-        // ==================================================
-
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,10 +51,6 @@ class LeftScaleWidget extends StatelessWidget {
                 return Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // --------------------------------------
-                    // VALEUR
-                    // --------------------------------------
-
                     SizedBox(
                       width: 50,
                       child: isMainGraduation
@@ -83,11 +70,6 @@ class LeftScaleWidget extends StatelessWidget {
                     ),
 
                     const SizedBox(width: 5),
-
-                    // --------------------------------------
-                    // TRAIT
-                    // --------------------------------------
-
                     Container(
                       width: isMainGraduation
                           ? 30

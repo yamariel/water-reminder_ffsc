@@ -15,33 +15,20 @@ class GlassPainter extends CustomPainter {
       Canvas canvas,
       Size size,
       ) {
-    // ==================================================
-    // DIMENSIONS DU VERRE
-    // ==================================================
-
     final double left = size.width * 0.05;
     final double right = size.width * 0.95;
-
     final double top = 10;
     final double bottom = size.height - 15;
-
-    // ==================================================
-    // FORME DU VERRE
-    // ==================================================
-
     final Path glassPath = Path()
     // Coin supérieur gauche
       ..moveTo(left, top)
-
     // Bord supérieur
       ..lineTo(right, top)
-
     // Côté droit légèrement incliné
       ..lineTo(
         right - 25,
         bottom - 20,
       )
-
     // Arrondi inférieur droit
       ..quadraticBezierTo(
         right - 30,
@@ -49,13 +36,11 @@ class GlassPainter extends CustomPainter {
         right - 55,
         bottom,
       )
-
     // Bas
       ..lineTo(
         left + 55,
         bottom,
       )
-
     // Arrondi inférieur gauche
       ..quadraticBezierTo(
         left + 30,
@@ -63,14 +48,8 @@ class GlassPainter extends CustomPainter {
         left + 25,
         bottom - 20,
       )
-
     // Retour vers le haut
       ..close();
-
-    // ==================================================
-    // CONTOUR DU VERRE
-    // ==================================================
-
     final Paint borderPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4
@@ -80,11 +59,6 @@ class GlassPainter extends CustomPainter {
       glassPath,
       borderPaint,
     );
-
-    // ==================================================
-    // BORD SUPÉRIEUR
-    // ==================================================
-
     // Le bord supérieur doit être légèrement
     // plus visible que les autres côtés.
     final Paint rimPaint = Paint()
@@ -98,11 +72,6 @@ class GlassPainter extends CustomPainter {
       Offset(right, top),
       rimPaint,
     );
-
-    // ==================================================
-    // REFLET PRINCIPAL
-    // ==================================================
-
     // Ce reflet blanc permet de donner l'impression
     // que la lumière se réfléchit sur le verre.
     final Paint reflectionPaint = Paint()
@@ -127,11 +96,6 @@ class GlassPainter extends CustomPainter {
       reflectionPath,
       reflectionPaint,
     );
-
-    // ==================================================
-    // PETIT REFLET À DROITE
-    // ==================================================
-
     final Paint smallReflectionPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2

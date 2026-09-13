@@ -65,7 +65,7 @@ class HydrationNotifier extends Notifier<HydrationState> {
     await _loadData();
   }
 
-  Future<void> deleRecord(int index) async {
+  Future<void> deleteRecord(int index) async {
     await _repository.addWater(index);
     await _loadData();
   }

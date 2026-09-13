@@ -270,6 +270,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -853,6 +858,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  water_animation:
+    dependency: "direct main"
+    description:
+      name: water_animation
+      sha256: c864fb64d0b1eeb96c80e3fe2c06b2c6a0cdff73dac04af5b4aec27267bfd9ee
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   web:
     dependency: transitive
     description:

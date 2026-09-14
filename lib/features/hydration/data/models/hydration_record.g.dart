@@ -55,7 +55,6 @@ class DrinkTypeAdapter extends TypeAdapter<DrinkType> {
     switch (reader.readByte()) {
       case 0:
         return DrinkType.water;
-
       default:
         return DrinkType.water;
     }

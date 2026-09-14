@@ -18,14 +18,14 @@ class HydrationRecord extends HiveObject {
   final DateTime date;
 
   @HiveField(1)
-  final int amountM1;
+  final int amountMl;
 
   @HiveField(2)
   final DrinkType type;
 
   HydrationRecord({
     required this.date,
-    required this.amountM1,
+    required this.amountMl,
     required this.type,
   });
 }

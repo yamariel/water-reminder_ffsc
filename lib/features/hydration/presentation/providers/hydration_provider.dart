@@ -22,12 +22,12 @@ class HydrationState {
       const HydrationState(todayTotalM1: 0, history: [], isLoading: true);
 
   HydrationState copyWith({
-    int? todayTotalMl,
+    int? todayTotalM1,
     List<HydrationRecord>? history,
     bool? isLoading,
   }) {
     return HydrationState(
-      todayTotalM1: todayTotalMl ?? todayTotalM1,
+      todayTotalM1: todayTotalM1 ?? this.todayTotalM1,
       history: history ?? this.history,
       isLoading: isLoading ?? this.isLoading,
     );
@@ -49,7 +49,7 @@ class HydrationNotifier extends Notifier<HydrationState> {
     final total = await _repository.getTodayWater();
     final history = await _repository.getHistory();
     state = state.copyWith(
-      todayTotalMl: total,
+      todayTotalM1: total,
       history: history,
       isLoading: false,
     );
@@ -65,14 +65,14 @@ class HydrationNotifier extends Notifier<HydrationState> {
     await _loadData();
   }
 
-  Future<void> deleRecord(int index) async {
-    await _repository.addWater(index);
+  Future<void> deleteRecord(int index) async {
+    await _repository.deleteRecord(index);
     await _loadData();
   }
 }
 
 final hydrationProvider = NotifierProvider<HydrationNotifier, HydrationState>(
   () {
-    return HydrationNotifier();
+    return HydrationNotifier.new();
   },
 );

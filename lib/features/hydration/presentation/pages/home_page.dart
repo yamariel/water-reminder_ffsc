@@ -1,14 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:water/features/hydration/presentation/providers/hydration_provider.dart';
-import '../providers/daily_goal_provider.dart';
-import '../widgets/hydration_header.dart';
-import '../widgets/water_glass_placeholder.dart';
-import '../widgets/progress_label.dart';
-import '../widgets/quick_amount_buttons.dart';
-import '../widgets/free_amount_field.dart';
-
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
@@ -21,7 +10,7 @@ class HomePage extends ConsumerWidget {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    final currentAmountMl = hydrationState.todayTotalM1; // ⚠️ chiffre 1, pas la lettre l
+    final currentAmountMl = hydrationState.todayTotalM1; 
     final progressPercent = (currentAmountMl / goalAmountMl).clamp(0.0, 1.0) * 100;
 
     void addWater(int amountMl) {
@@ -38,9 +27,9 @@ class HomePage extends ConsumerWidget {
             children: [
               const HydrationHeader(),
               const SizedBox(height: 24),
-              GraduationAndGlassPlaceholder(
-                currentAmountMl: currentAmountMl,
-                goalAmountMl: goalAmountMl,
+              WaterProgressWidget(
+                consumedValue: currentAmountMl,
+                goalOfTheDay: goalAmountMl,
               ),
               const SizedBox(height: 12),
               ProgressLabel(percent: progressPercent),

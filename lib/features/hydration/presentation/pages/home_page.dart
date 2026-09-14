@@ -1,17 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:water/features/hydration/presentation/providers/hydration_provider.dart';
+import 'package:water/features/hydration/presentation/widgets/water_progress_widget.dart';
+import 'package:water/features/hydration/presentation/widgets/hydration_header.dart';
+import 'package:water/features/hydration/presentation/widgets/progress_label.dart';
+import 'package:water/features/hydration/presentation/widgets/quick_amount_buttons.dart';
+import 'package:water/features/hydration/presentation/widgets/free_amount_field.dart';
+
+const int _mockGoalMl = 2000;
+
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hydrationState = ref.watch(hydrationProvider);
-    final goalAmountMl = ref.watch(dailyGoalProvider);
 
     if (hydrationState.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    final currentAmountMl = hydrationState.todayTotalM1; 
-    final progressPercent = (currentAmountMl / goalAmountMl).clamp(0.0, 1.0) * 100;
+    final currentAmountMl = hydrationState.todayTotalM1;
+    const goalAmountMl = _mockGoalMl;
+    final progressPercent = (currentAmountMl / goalAmountMl).clamp(0.0, 1.0);
 
     void addWater(int amountMl) {
       ref.read(hydrationProvider.notifier).addWater(amountMl);

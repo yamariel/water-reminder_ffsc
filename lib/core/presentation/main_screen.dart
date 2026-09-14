@@ -17,7 +17,7 @@ class MainScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       const HomePage(),
-      const HistoryPagePage(),
+      const HistoryPage(),
       const SettingsPage(),
     ];
 

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/notifications/notification_service.dart';
 import '../../data/repositories/settings_repository_impl.dart';
 import '../../domain/models/user_settings.dart';
 import '../../domain/repositories/settings_repository.dart';
@@ -49,6 +50,8 @@ class UserSettingsNotifier extends Notifier<UserSettings> {
     state = newSettings;
     final repo = await ref.read(settingsRepositoryProvider.future);
     await repo.saveSetting(state);
+
+    await NotificationService().rescheduleWaterReminders(state);
   }
 
   //Mettre à jour le genre

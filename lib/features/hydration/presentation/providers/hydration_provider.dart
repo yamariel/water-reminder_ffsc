@@ -72,7 +72,5 @@ class HydrationNotifier extends Notifier<HydrationState> {
 }
 
 final hydrationProvider = NotifierProvider<HydrationNotifier, HydrationState>(
-  () {
-    return HydrationNotifier.new();
-  },
+  HydrationNotifier.new,
 );

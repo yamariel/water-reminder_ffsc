@@ -6,9 +6,11 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../features/settings/domain/models/user_settings.dart';
 
 class NotificationService {
-  final notificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin notificationsPlugin;
   bool _isInitialized = false;
   bool get isInitialized => _isInitialized;
+  NotificationService({FlutterLocalNotificationsPlugin? plugin})
+    : notificationsPlugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   //initialisation des notifications
   Future<void> init() async {
@@ -119,7 +121,7 @@ class NotificationService {
 
     int notificationId = 0;
     DateTime reminderTime = wakeUp.add(
-      Duration(minutes: settings.reminderIntervalMinutes)
+      Duration(minutes: settings.reminderIntervalMinutes),
     );
 
     while (reminderTime.isBefore(bed)) {
@@ -127,13 +129,13 @@ class NotificationService {
         id: notificationId,
         title: "C'est l'heure de boire !",
         body: "Un petit verre d'eau pour atteindre votre objectif.",
-        scheduledDate: tz.TZDateTime.from(reminderTime, tz.local), 
+        scheduledDate: tz.TZDateTime.from(reminderTime, tz.local),
         notificationDetails: notificationDetails(),
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
       );
       reminderTime = reminderTime.add(
-        Duration(minutes: settings.reminderIntervalMinutes)
+        Duration(minutes: settings.reminderIntervalMinutes),
       );
       notificationId++;
     }

@@ -17,7 +17,7 @@ class MainScreen extends ConsumerWidget {
 
     final List<Widget> pages = [
       const HomePage(),
-      const HistoryPagePage(),
+      const HistoryPage(),
       const SettingsPage(),
     ];
 
@@ -26,7 +26,6 @@ class MainScreen extends ConsumerWidget {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        selectedItemColor: Colors.blueAccent,
         onTap: (index) {
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },

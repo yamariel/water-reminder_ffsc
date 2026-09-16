@@ -18,7 +18,7 @@ class HydrationRecordAdapter extends TypeAdapter<HydrationRecord> {
     };
     return HydrationRecord(
       date: fields[0] as DateTime,
-      amountM1: fields[1] as int,
+      amountMl: fields[1] as int,
       type: fields[2] as DrinkType,
     );
   }
@@ -30,7 +30,7 @@ class HydrationRecordAdapter extends TypeAdapter<HydrationRecord> {
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
-      ..write(obj.amountM1)
+      ..write(obj.amountMl)
       ..writeByte(2)
       ..write(obj.type);
   }
@@ -55,7 +55,6 @@ class DrinkTypeAdapter extends TypeAdapter<DrinkType> {
     switch (reader.readByte()) {
       case 0:
         return DrinkType.water;
-
       default:
         return DrinkType.water;
     }

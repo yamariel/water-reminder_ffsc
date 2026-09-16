@@ -11,7 +11,7 @@ class HydrationRepoImpl implements HydrationRepository {
   Future<void> addWater(int amount) async {
     final record = HydrationRecord(
       date: DateTime.now(),
-      amountM1: amount,
+      amountMl: amount,
       type: DrinkType.water,
     );
     await _box.add(record);
@@ -21,7 +21,7 @@ class HydrationRepoImpl implements HydrationRepository {
   Future<int> getTodayWater() async {
     return _box.values
         .where((record) => DateFormatter.isToday(record.date))
-        .fold<int>(0, (sum, record) => sum + record.amountM1);
+        .fold<int>(0, (sum, record) => sum + record.amountMl);
   }
 
   @override

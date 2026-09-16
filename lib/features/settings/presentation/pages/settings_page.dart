@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/notifications/notification_service.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../providers/settings_provider.dart';
 import '../widgets/daily_goal_card.dart';
@@ -140,6 +141,20 @@ class SettingsPage extends ConsumerWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () async {
+                await NotificationService().requestPermissions();
+
+                await NotificationService().showNotification(
+                  id: 999,
+                  title: "C'est l'heure de boire !",
+                  body: "Un petit verre d'eau pour atteindre votre objectif.",
+                );
+              },
+              icon: const Icon(Icons.notifications_active),
+              label: const Text('Tester la notification instantanée'),
             ),
           ],
         ),

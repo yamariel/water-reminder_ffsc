@@ -40,7 +40,7 @@ class HydrationNotifier extends Notifier<HydrationState> {
   @override
   HydrationState build() {
     _repository = ref.read(hydrationRepositoryProvider);
-    _loadData();
+    Future.microtask(() => _loadData());
     return HydrationState.initial();
   }
 

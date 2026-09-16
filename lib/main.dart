@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'core/theme/app_theme.dart';
 import 'core/database/hive_setup.dart';
 import 'core/notifications/notification_service.dart';
 import 'core/presentation/main_screen.dart';
@@ -9,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await HiveSetup.init();
-  await NotificationService.init();
+  await NotificationService().init();
 
   runApp(const ProviderScope(child: WaterReminderApp()));
 }
@@ -22,10 +24,9 @@ class WaterReminderApp extends StatelessWidget {
     return MaterialApp(
       title: 'WaterReminder',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.theme,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [Locale('fr', 'FR')],
       home: const MainScreen(),
     );
   }

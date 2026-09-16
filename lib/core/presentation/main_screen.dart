@@ -26,7 +26,6 @@ class MainScreen extends ConsumerWidget {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        selectedItemColor: Colors.blueAccent,
         onTap: (index) {
           ref.read(bottomNavIndexProvider.notifier).state = index;
         },

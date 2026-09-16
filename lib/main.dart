@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await HiveSetup.init();
-  await NotificationService.init();
+  await NotificationService().init();
 
   runApp(const ProviderScope(child: WaterReminderApp()));
 }

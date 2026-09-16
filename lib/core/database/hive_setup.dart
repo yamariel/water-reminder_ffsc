@@ -14,15 +14,17 @@ class HiveSetup {
   }
 
   static void _registerAdapters() {
-    if (!Hive.isAdapterRegistered(HydrationRecordAdapter().typeId)) {
-      Hive.registerAdapter(HydrationRecordAdapter()); // fonction a definir
+    if (!Hive.isAdapterRegistered(DrinkTypeAdapter().typeId)) {
+      Hive.registerAdapter(DrinkTypeAdapter()); 
     }
-    // on pourra definir les les futurs modeles ici
+
+    if (!Hive.isAdapterRegistered(HydrationRecordAdapter().typeId)) {
+      Hive.registerAdapter(HydrationRecordAdapter());
+    }
   }
 
   static Future<void> _openBoxes() async {
     await Hive.openBox<HydrationRecord>(hydrationBoxName);
-    // ici aussi on pourra ajouter less autres boxes si necessaires
   }
 
   static Box<HydrationRecord> get hydrationBox =>

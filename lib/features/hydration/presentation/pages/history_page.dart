@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/date_formatter.dart';
 import '../providers/hydration_provider.dart';
 import '../widgets/empty_water_history.dart';
 import '../widgets/water_history_item.dart';
-
 
 class HistoryPage extends ConsumerWidget {
   const HistoryPage({super.key});
@@ -39,7 +39,8 @@ class HistoryPage extends ConsumerWidget {
                 final record = hydrationState.history[index];
 
                 return WaterHistoryItem(
-                  time: record.date.toLocal().toString(),
+                  // ASTUCE : On utilise ton utilitaire au lieu du toString() brut !
+                  time: DateFormatter.formatTime(record.date.toLocal()),
                   amount: record.amountMl,
                   onDelete: () {
                     ref.read(hydrationProvider.notifier).deleteRecord(index);

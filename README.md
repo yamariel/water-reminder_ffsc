@@ -56,12 +56,7 @@ lib/
 │   ├── hydration/              
 │   │   ├── data/               
 │   │   ├── domain/             
-│   │   └── presentation/       
-│   │
-│   ├── home/                   
-│   │   ├── data/               
-│   │   ├── domain/             
-│   │   └── presentation/           
+│   │   └── presentation/         
 │   │
 │   └── settings/              
 │      ├── data/               

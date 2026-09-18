@@ -59,12 +59,15 @@ lib/
 │   │   └── presentation/       
 │   │
 │   ├── home/                   
-│   │   └── presentation/       
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/           
 │   │
 │   └── settings/              
-│       ├── domain/             
-│       └── presentation/       
-│
+│      ├── data/               
+│      ├── domain/             
+│      └── presentation/       
+├──main                   
 ```
 ## L'Équipe - Groupe 30
 
